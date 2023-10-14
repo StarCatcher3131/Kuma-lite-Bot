@@ -22,7 +22,7 @@ client.once("ready", () => {
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
 
-  //   randomanime command
+  // randomanime command
   if (interaction.commandName === "randomanime") {
     try {
       // Make a GET request to the specified endpoint
@@ -96,39 +96,19 @@ client.on("interactionCreate", async (interaction) => {
     }
   }
 
-  // searchanime command
-  if (interaction.commandName === "searchanime") {
+  // randomtvshow command
+  if (interaction.commandName === "randomtvshow") {
+  }
+  // randommovie command
+  if (interaction.commandName === "randommovie") {
+  }
+
+  // randommanga command
+  if (interaction.commandName === "randommanga") {
     try {
-      // Get the query from the user
-      const query = interaction.options.getString("query");
-      console.log(query);
-      console.log(interaction.options);
-      console.log(interaction);
-
-      if (!query) {
-        await interaction.reply("Please provide a valid search query.");
-        return;
-      }
-
-      // Make a GET request to the search anime endpoint
-      const response = await axios.get(
-        `https://api.jikan.moe/v4/anime?q=${query}`
-      );
-
+      // Make a GET request to the specified endpoint
+      const response = await axios.get("https://api.jikan.moe/v4/random/manga");
       const data = response.data.data;
-
-      // Check if there's a YouTube trailer available
-      let trailerUrl = "No trailer available";
-      if (data.trailer?.youtube_id) {
-        trailerUrl = `https://www.youtube.com/watch?v=${data.trailer.youtube_id}`;
-      }
-
-      // Fallback image URLs
-      const thumbnailUrl = "https://example.com/default-thumbnail.jpg";
-      const imageUrl = "https://example.com/default-image.jpg";
-
-      const startDate = data.aired ? data.aired.from || "N/A" : "N/A";
-      const endDate = data.aired ? data.aired.to || "N/A" : "N/A";
 
       const embed = {
         title: data.title,
@@ -136,7 +116,178 @@ client.on("interactionCreate", async (interaction) => {
         color: 0x0099ff,
         description: data.synopsis,
         thumbnail: {
-          url: thumbnailUrl,
+          url: data.images.jpg.image_url,
+        },
+        fields: [
+          {
+            name: "Type",
+            value: data.type || "N/A", // Use "N/A" if data.type is null
+            inline: true,
+          },
+          {
+            name: "Volumes",
+            value: data.volumes ? data.volumes.toString() : "N/A", // Use "N/A" if data.volumes is null
+            inline: true,
+          },
+          {
+            name: "Chapters",
+            value: data.chapters ? data.chapters.toString() : "N/A", // Use "N/A" if data.chapters is null
+            inline: true,
+          },
+          {
+            name: "Start Date",
+            value: data.published.from || "N/A", // Use "N/A" if data.published.from is null
+            inline: true,
+          },
+          {
+            name: "End Date",
+            value: data.published.to || "N/A", // Use "N/A" if data.published.to is null
+            inline: true,
+          },
+          {
+            name: "Score",
+            value: data.score ? data.score.toString() : "N/A", // Use "N/A" if data.score is null
+            inline: true,
+          },
+          {
+            name: "Rated",
+            value: data.rating || "N/A", // Use "N/A" if data.rating is null
+            inline: true,
+          },
+        ],
+        image: {
+          url: data.images.jpg.image_url,
+        },
+        timestamp: new Date(),
+        footer: {
+          text: "Powered by Nomekuma",
+          icon_url: "https://avatars.githubusercontent.com/u/122863540?v=4",
+        },
+      };
+
+      await interaction.reply({ embeds: [embed] });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // searchanime command
+  if (interaction.commandName === "searchanime") {
+    try {
+      const query = interaction.options.getString("query");
+      if (!query) {
+        await interaction.reply("Please provide a valid search query.");
+        return;
+      }
+
+      const response = await axios.get(
+        `https://api.jikan.moe/v4/anime?q=${query}`
+      );
+      let data = response.data.data[0]; // Using 'let' to allow reassignment
+
+      // Check if the data exists, if not, provide empty values
+      if (!data) {
+        data = {
+          title: "N/A",
+          url: "",
+          synopsis: "N/A",
+          type: "N/A",
+          episodes: "N/A",
+          aired: { from: "N/A", to: "N/A" },
+          score: "N/A",
+          rating: "N/A",
+          images: { jpg: { image_url: "" } },
+          trailer: { youtube_id: "" },
+        };
+      }
+
+      let trailerUrl = "No trailer available";
+      if (data.trailer?.youtube_id) {
+        trailerUrl = `https://www.youtube.com/watch?v=${data.trailer.youtube_id}`;
+      }
+
+      const embed = {
+        title: data.title,
+        url: data.url || "",
+        color: 0x0099ff,
+        description: data.synopsis,
+        thumbnail: {
+          url: data.images?.jpg?.image_url || "",
+        },
+        fields: [
+          {
+            name: "Type",
+            value: data.type,
+            inline: true,
+          },
+          {
+            name: "Episodes",
+            value: data.episodes.toString(),
+            inline: true,
+          },
+          {
+            name: "Start Date",
+            value: data.aired.from,
+            inline: true,
+          },
+          {
+            name: "End Date",
+            value: data.aired.to,
+            inline: true,
+          },
+          {
+            name: "Score",
+            value: data.score.toString(),
+            inline: true,
+          },
+          {
+            name: "Rated",
+            value: data.rating,
+            inline: true,
+          },
+          {
+            name: "Trailer",
+            value: trailerUrl,
+            inline: true,
+          },
+        ],
+        image: {
+          url: data.images?.jpg?.image_url || "",
+        },
+        timestamp: new Date(),
+        footer: {
+          text: "Powered by Nomekuma",
+          icon_url: "https://avatars.githubusercontent.com/u/122863540?v=4",
+        },
+      };
+
+      await interaction.reply({ embeds: [embed] });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // searchmanga command
+  if (interaction.commandName === "searchmanga") {
+    try {
+      const query = interaction.options.getString("query");
+      if (!query) {
+        await interaction.reply("Please provide a valid search query.");
+        return;
+      }
+
+      const response = await axios.get(
+        `https://api.jikan.moe/v4/manga?q=${query}`
+      );
+      const data = response.data.data[0];
+
+      const embed = {
+        title: data.title || "N/A",
+        url: data.url || "",
+        color: 0x0099ff,
+        description: data.synopsis || "N/A",
+        thumbnail: {
+          url: data.images?.jpg?.image_url || "",
         },
         fields: [
           {
@@ -145,18 +296,23 @@ client.on("interactionCreate", async (interaction) => {
             inline: true,
           },
           {
-            name: "Episodes",
-            value: data.episodes ? data.episodes.toString() : "N/A",
+            name: "Volumes",
+            value: data.volumes ? data.volumes.toString() : "N/A",
+            inline: true,
+          },
+          {
+            name: "Chapters",
+            value: data.chapters ? data.chapters.toString() : "N/A",
             inline: true,
           },
           {
             name: "Start Date",
-            value: startDate,
+            value: data.published?.from || "N/A",
             inline: true,
           },
           {
             name: "End Date",
-            value: endDate,
+            value: data.published?.to || "N/A",
             inline: true,
           },
           {
@@ -171,12 +327,14 @@ client.on("interactionCreate", async (interaction) => {
           },
           {
             name: "Trailer",
-            value: trailerUrl,
+            value: data.trailer?.youtube_id
+              ? `https://www.youtube.com/watch?v=${data.trailer.youtube_id}`
+              : "No trailer available",
             inline: true,
           },
         ],
         image: {
-          url: imageUrl,
+          url: data.images?.jpg?.image_url || "",
         },
         timestamp: new Date(),
         footer: {
@@ -285,20 +443,18 @@ ${guild.members.cache
 
   // Function to determine the rank based on the time in server
   function getRank(timeInServer) {
-    if (timeInServer >= 365) {
+    if (timeInServer.includes("yrs")) {
       return { label: "🥇", name: "Gold" };
-    } else if (timeInServer >= 180) {
+    } else if (timeInServer.includes("month") || timeInServer.includes("mo")) {
       return { label: "🥈", name: "Silver" };
-    } else if (timeInServer >= 90) {
+    } else if (timeInServer.includes("day")) {
       return { label: "🥉", name: "Bronze" };
-    } else if (timeInServer >= 30) {
+    } else if (timeInServer.includes("hr")) {
       return { label: "👶", name: "Newbie" };
-    } else if (timeInServer >= 7) {
+    } else if (timeInServer.includes("sec")) {
       return { label: "👼", name: "Lesser" };
-    } else if (timeInServer >= 1) {
-      return { label: "👤", name: "Newcomer" };
     } else {
-      return { label: "👻", name: "Visitor" };
+      return { label: "👤", name: "Newcomer" };
     }
   }
 
@@ -308,40 +464,15 @@ ${guild.members.cache
       color: 0x0099ff,
       fields: [
         {
-          name: "/ping",
-          value: "Replies with Pong!",
-          inline: true,
-        },
-        {
-          name: "/randomanime",
-          value: "Provides a new anime to watch!",
-          inline: true,
-        },
-        {
-          name: "/searchanime",
-          value: "Provides a new anime to watch!",
-          inline: true,
-        },
-        {
-          name: "/movies",
-          value: "Provides a new movie to watch!",
-          inline: true,
-        },
-        {
-          name: "/tvshow",
-          value: "Provides a new TV show to watch!",
-          inline: true,
-        },
-        {
-          name: "/rank",
-          value:
-            "Provides a rank of users based on their time on the Discord server!",
-          inline: true,
-        },
-        {
-          name: "/help",
-          value: "Provides a list of commands",
-          inline: true,
+          name: "Commands",
+          value: `
+                    **/randomanime** - Provides a new anime to watch!
+                    **/randommanga** - Provides a new manga to read!
+                    **/searchanime** - Search for an anime
+                    **/searchmanga** - Search for a manga
+                    **/rank** - Provides a rank of users based on their time on the Discord server!
+                    **/help** - Provides a list of commands
+                  `,
         },
       ],
       timestamp: new Date(),

@@ -8,14 +8,6 @@ const commands = [
     description: "Provides a new anime to watch!",
   },
   {
-    name: "randommovie",
-    description: "Provides a new movie to watch!",
-  },
-  {
-    name: "randomtvshow",
-    description: "Provides a new TV show to watch!",
-  },
-  {
     name: "randommanga",
     description: "Provides a new manga to read!",
   },
@@ -32,12 +24,16 @@ const commands = [
     ],
   },
   {
-    name: "movies",
-    description: "Provides a new movie to watch!",
-  },
-  {
-    name: "tvshow",
-    description: "Provides a new TV show to watch!",
+    name: "searchmanga",
+    description: "Search for a manga",
+    options: [
+      {
+        name: "query",
+        description: "Name of the manga",
+        type: 3,
+        required: true,
+      },
+    ],
   },
   {
     name: "rank",
