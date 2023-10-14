@@ -1,7 +1,14 @@
 import { REST, Routes } from "discord.js";
 import dotenv from "dotenv";
+
 dotenv.config();
 
+/**
+ * An array of objects that define the commands.
+ *
+ * @type {Object[]} - An array of objects that define the commands.
+ * @property {string} name - The name of the command.
+ */
 const commands = [
   {
     name: "randomanime",
@@ -47,15 +54,29 @@ const commands = [
 ];
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
+/**
+ * Registers the specified application commands.
+ *
+ * @param {Client} client - The Discord client.
+ * @param {string} clientId - The client ID associated with your application.
+ */
+export function registerCommands(client, clientId) {
+  try {
+    console.log("Started refreshing application (/) commands.");
 
-try {
-  console.log("Started refreshing application (/) commands.");
+    // Set up your commands
+    client.once("ready", async () => {
+      try {
+        await rest.put(Routes.applicationCommands(clientId), {
+          body: commands,
+        });
 
-  await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
-    body: commands,
-  });
-
-  console.log("Successfully reloaded application (/) commands.");
-} catch (error) {
-  console.error(error);
+        console.log("Successfully reloaded application (/) commands.");
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }
