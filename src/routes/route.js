@@ -52,7 +52,7 @@ const commands = [
     description: "Provides a list of commands",
   },
   {
-    name: "download",
+    name: "webtoonDownload",
     description: "Download webtoon images",
     options: [
       {
@@ -78,6 +78,18 @@ const commands = [
         description: "NID_SES (optional)",
         type: 3,
         required: false,
+      },
+    ],
+  },
+  {
+    name: "webtoonSearch",
+    description: "Search for the specified webtoon to get the id",
+    options: [
+      {
+        name: "keyword",
+        description: "The keyword to search for",
+        type: 3,
+        required: true,
       },
     ],
   },
