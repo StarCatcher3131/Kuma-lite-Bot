@@ -12,8 +12,8 @@ import {
 } from "./commands/manga.js";
 import { handleRankCommand } from "./commands/rank.js";
 import { handleHelpCommand } from "./commands/help.js";
-import { handleWebtoonDownloadCommand } from "./commands/webtoonDownload.js";
-import { handleWebtoonListCommand } from "./commands/webtoonList.js";
+import { handleWebtoonDownloadCommand } from "./commands/download_webtoon.js";
+import { handleWebtoonListCommand } from "./commands/webtoon.js";
 
 const app = express();
 app.get("/", (req, res) => res.send("Hello World!"));
