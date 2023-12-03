@@ -4,7 +4,7 @@
  */
 import { EmbedBuilder } from "discord.js";
 
-export function handleHelpCommand(interaction) {
+export async function handleHelpCommand(interaction) {
 
   const embed = new EmbedBuilder()
     .setTitle("Help")
@@ -26,6 +26,6 @@ export function handleHelpCommand(interaction) {
       iconURL: "https://avatars.githubusercontent.com/u/122863540?v=4",
     });
 
-  interaction.reply({ embeds: [embed] });
+  await interaction.reply({ embeds: [embed] });
  
 }

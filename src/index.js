@@ -12,7 +12,8 @@ import {
 } from "./commands/manga.js";
 import { handleRankCommand } from "./commands/rank.js";
 import { handleHelpCommand } from "./commands/help.js";
-
+import { handleDownloadCommand } from "./commands/download.js";
+import { handleSearchCommand } from "./commands/search.js";
 const app = express();
 app.get("/", (req, res) => res.send("Hello World!"));
 app.listen(3000, () => console.log("Server is running..."));
@@ -56,7 +57,13 @@ client.on("interactionCreate", async (interaction) => {
       await handleRankCommand(interaction);
       break;
     case "help":
-      handleHelpCommand(interaction);
+      await handleHelpCommand(interaction);
+      break;
+    case "search":
+      await handleSearchCommand(interaction);
+      break;
+    case "download":
+      await handleDownloadCommand(interaction);
       break;
     default:
       break;

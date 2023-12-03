@@ -4,7 +4,7 @@
  */
 import { EmbedBuilder } from "discord.js";
 
-export function handleRankCommand(interaction) {
+export async function handleRankCommand(interaction) {
   const guild = interaction.guild;
   const currentDate = new Date();
 
@@ -31,7 +31,7 @@ export function handleRankCommand(interaction) {
       iconURL: "https://avatars.githubusercontent.com/u/122863540?v=4",
     });
 
-  interaction.reply({ embeds: [embed] });
+  await interaction.reply({ embeds: [embed] });
 
 }
 /**
