@@ -51,6 +51,36 @@ const commands = [
     name: "help",
     description: "Provides a list of commands",
   },
+  {
+    name: "download",
+    description: "Download webtoon images",
+    options: [
+      {
+        name: "webtoonid",
+        description: "The ID of the webtoon",
+        type: 3,
+        required: true,
+      },
+      {
+        name: "chapterno",
+        description: "The number of the chapter",
+        type: 3,
+        required: true,
+      },
+      {
+        name: "nid_aut",
+        description: "NID_AUT (optional)",
+        type: 3,
+        required: false,
+      },
+      {
+        name: "nid_ses",
+        description: "NID_SES (optional)",
+        type: 3,
+        required: false,
+      },
+    ],
+  },
 ];
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
