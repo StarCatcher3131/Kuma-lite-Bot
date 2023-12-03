@@ -5,6 +5,7 @@
 import { EmbedBuilder } from "discord.js";
 
 export function handleHelpCommand(interaction) {
+  interaction.deferReply();
   const embed = new EmbedBuilder()
     .setTitle("Help")
     .setColor(0x0099ff)

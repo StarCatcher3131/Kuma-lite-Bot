@@ -11,7 +11,7 @@ export async function handleRandomAnimeCommand(interaction) {
     // Make a GET request to the specified endpoint
     const response = await axios.get("https://api.jikan.moe/v4/random/anime");
     const data = response.data.data;
-
+    await interaction.deferReply();
     // Check if there's a YouTube trailer available
     let trailerUrl = "No trailer available";
     if (data.trailer?.youtube_id) {
@@ -90,7 +90,7 @@ export async function handleSearchAnimeCommand(interaction) {
       `https://api.jikan.moe/v4/anime?q=${query}`
     );
     let data = response.data.data[0]; // Using 'let' to allow reassignment
-
+    await interaction.deferReply();
     // Check if the data exists, if not, provide empty values
     if (!data) {
       data = {

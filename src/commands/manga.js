@@ -10,6 +10,7 @@ export async function handleRandomMangaCommand(interaction) {
     // Make a GET request to the specified endpoint
     const response = await axios.get("https://api.jikan.moe/v4/random/manga");
     const data = response.data.data;
+    await interaction.deferReply();
     const embed = new EmbedBuilder()
       .setTitle(data.title || "N/A")
       .setURL(data.url || "")
@@ -83,6 +84,7 @@ export async function handleSearchMangaCommand(interaction) {
       `https://api.jikan.moe/v4/manga?q=${query}`
     );
     const data = response.data.data[0];
+    await interaction.deferReply();
     const embed = new EmbedBuilder()
       .setTitle(data.title || "N/A")
       .setURL(data.url || "")

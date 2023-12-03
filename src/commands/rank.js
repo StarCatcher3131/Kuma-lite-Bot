@@ -7,6 +7,7 @@ import { EmbedBuilder } from "discord.js";
 export function handleRankCommand(interaction) {
   const guild = interaction.guild;
   const currentDate = new Date();
+ interaction.deferReply();
 
   // Create a message with the ranked list
   const rankMessage = `🏆 **Server Rank**
