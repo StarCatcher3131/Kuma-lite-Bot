@@ -51,48 +51,6 @@ const commands = [
     name: "help",
     description: "Provides a list of commands",
   },
-  {
-    name: "webtoonDownload",
-    description: "Download webtoon images",
-    options: [
-      {
-        name: "webtoonid",
-        description: "The ID of the webtoon",
-        type: 3,
-        required: true,
-      },
-      {
-        name: "chapterno",
-        description: "The number of the chapter",
-        type: 3,
-        required: true,
-      },
-      {
-        name: "nid_aut",
-        description: "NID_AUT (optional)",
-        type: 3,
-        required: false,
-      },
-      {
-        name: "nid_ses",
-        description: "NID_SES (optional)",
-        type: 3,
-        required: false,
-      },
-    ],
-  },
-  {
-    name: "webtoonSearch",
-    description: "Search for the specified webtoon to get the id",
-    options: [
-      {
-        name: "keyword",
-        description: "The keyword to search for",
-        type: 3,
-        required: true,
-      },
-    ],
-  },
 ];
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
