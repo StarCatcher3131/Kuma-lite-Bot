@@ -14,7 +14,7 @@ import { handleRankCommand } from "./commands/rank.js";
 import { handleHelpCommand } from "./commands/help.js";
 
 const app = express();
-app.get("/", (req, res) => res.send("Hello World!")); 
+app.get("/", (req, res) => res.send("Hello World!"));
 app.listen(3000, () => console.log("Server is running..."));
 
 // load env variables
@@ -56,7 +56,7 @@ client.on("interactionCreate", async (interaction) => {
       await handleRankCommand(interaction);
       break;
     case "help":
-      await handleHelpCommand(interaction);
+      handleHelpCommand(interaction);
       break;
     default:
       break;

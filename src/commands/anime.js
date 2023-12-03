@@ -18,11 +18,11 @@ export async function handleRandomAnimeCommand(interaction) {
       trailerUrl = `https://www.youtube.com/watch?v=${data.trailer.youtube_id}`;
     }
     const embed = new EmbedBuilder()
-      .setTitle(data.title)
-      .setURL(data.url)
+      .setTitle(data.title || "N/A")
+      .setURL(data.url || "")
       .setColor(0x0099ff)
-      .setDescription(data.synopsis)
-      .setThumbnail(data.images.jpg.image_url)
+      .setDescription(data.synopsis || "N/A")
+      .setThumbnail(data.images.jpg.image_url || "")
       .addFields(
         {
           name: "Type",
@@ -56,11 +56,11 @@ export async function handleRandomAnimeCommand(interaction) {
         },
         {
           name: "Trailer",
-          value: trailerUrl,
+          value: trailerUrl || "N/A", // Use "N/A" if trailerUrl is null
           inline: true,
         }
       )
-      .setImage(data.images.jpg.image_url)
+      .setImage(data.images.jpg.image_url || "")
       .setTimestamp(new Date())
       .setFooter({
         text: "Powered by Nomekuma",
@@ -68,6 +68,7 @@ export async function handleRandomAnimeCommand(interaction) {
       });
 
     await interaction.reply({ embeds: [embed] });
+    interaction.followUp("This is a follow up message");
   } catch (error) {
     console.error(error);
   }
@@ -111,11 +112,11 @@ export async function handleSearchAnimeCommand(interaction) {
       trailerUrl = `https://www.youtube.com/watch?v=${data.trailer.youtube_id}`;
     }
     const embed = new EmbedBuilder()
-      .setTitle(data.title)
-      .setURL(data.url)
+      .setTitle(data.title || "N/A")
+      .setURL(data.url || "")
       .setColor(0x0099ff)
-      .setDescription(data.synopsis)
-      .setThumbnail(data.images.jpg.image_url)
+      .setDescription(data.synopsis || "N/A")
+      .setThumbnail(data.images.jpg.image_url || "")
       .addFields(
         {
           name: "Type",
@@ -149,11 +150,11 @@ export async function handleSearchAnimeCommand(interaction) {
         },
         {
           name: "Trailer",
-          value: trailerUrl,
+          value: trailerUrl || "N/A",
           inline: true,
         }
       )
-      .setImage(data.images.jpg.image_url)
+      .setImage(data.images.jpg.image_url || "")
       .setTimestamp(new Date())
       .setFooter({
         text: "Powered by Nomekuma",
@@ -161,6 +162,7 @@ export async function handleSearchAnimeCommand(interaction) {
       });
 
     await interaction.reply({ embeds: [embed] });
+    interaction.followUp("This is a follow up message");
   } catch (error) {
     console.error(error);
   }

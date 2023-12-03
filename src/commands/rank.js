@@ -32,6 +32,7 @@ export function handleRankCommand(interaction) {
     });
 
   interaction.reply({ embeds: [embed] });
+  interaction.followUp("This is a follow up message");
 }
 /**
  *

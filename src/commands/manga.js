@@ -11,11 +11,11 @@ export async function handleRandomMangaCommand(interaction) {
     const response = await axios.get("https://api.jikan.moe/v4/random/manga");
     const data = response.data.data;
     const embed = new EmbedBuilder()
-      .setTitle(data.title)
-      .setURL(data.url)
+      .setTitle(data.title || "N/A")
+      .setURL(data.url || "")
       .setColor(0x0099ff)
-      .setDescription(data.synopsis)
-      .setThumbnail(data.images.jpg.image_url)
+      .setDescription(data.synopsis || "N/A")
+      .setThumbnail(data.images.jpg.image_url || "")
       .addFields(
         {
           name: "Type",
@@ -53,7 +53,7 @@ export async function handleRandomMangaCommand(interaction) {
           inline: true,
         }
       )
-      .setImage(data.images.jpg.image_url)
+      .setImage(data.images.jpg.image_url || "")
       .setTimestamp(new Date())
       .setFooter({
         text: "Powered by Nomekuma",
@@ -61,6 +61,7 @@ export async function handleRandomMangaCommand(interaction) {
       });
 
     await interaction.reply({ embeds: [embed] });
+    interaction.followUp("This is a follow up message");
   } catch (error) {
     console.error(error);
   }
@@ -140,6 +141,7 @@ export async function handleSearchMangaCommand(interaction) {
       });
 
     await interaction.reply({ embeds: [embed] });
+    interaction.followUp("This is a follow up message");
   } catch (error) {
     console.error(error);
   }
