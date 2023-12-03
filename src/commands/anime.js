@@ -1,4 +1,5 @@
 import axios from "axios";
+import { EmbedBuilder } from "discord.js";
 
 /**
  * Handles the /randomanime command
@@ -16,16 +17,13 @@ export async function handleRandomAnimeCommand(interaction) {
     if (data.trailer?.youtube_id) {
       trailerUrl = `https://www.youtube.com/watch?v=${data.trailer.youtube_id}`;
     }
-
-    const embed = {
-      title: data.title,
-      url: data.url,
-      color: 0x0099ff,
-      description: data.synopsis,
-      thumbnail: {
-        url: data.images.jpg.image_url,
-      },
-      fields: [
+    const embed = new EmbedBuilder()
+      .setTitle(data.title)
+      .setURL(data.url)
+      .setColor(0x0099ff)
+      .setDescription(data.synopsis)
+      .setThumbnail(data.images.jpg.image_url)
+      .addFields(
         {
           name: "Type",
           value: data.type || "N/A", // Use "N/A" if data.type is null
@@ -60,17 +58,14 @@ export async function handleRandomAnimeCommand(interaction) {
           name: "Trailer",
           value: trailerUrl,
           inline: true,
-        },
-      ],
-      image: {
-        url: data.images.jpg.image_url,
-      },
-      timestamp: new Date(),
-      footer: {
+        }
+      )
+      .setImage(data.images.jpg.image_url)
+      .setTimestamp(new Date())
+      .setFooter({
         text: "Powered by Nomekuma",
-        icon_url: "https://avatars.githubusercontent.com/u/122863540?v=4",
-      },
-    };
+        iconURL: "https://avatars.githubusercontent.com/u/122863540?v=4",
+      });
 
     await interaction.reply({ embeds: [embed] });
   } catch (error) {
@@ -115,61 +110,55 @@ export async function handleSearchAnimeCommand(interaction) {
     if (data.trailer?.youtube_id) {
       trailerUrl = `https://www.youtube.com/watch?v=${data.trailer.youtube_id}`;
     }
-
-    const embed = {
-      title: data.title,
-      url: data.url || "",
-      color: 0x0099ff,
-      description: data.synopsis,
-      thumbnail: {
-        url: data.images?.jpg?.image_url || "",
-      },
-      fields: [
+    const embed = new EmbedBuilder()
+      .setTitle(data.title)
+      .setURL(data.url)
+      .setColor(0x0099ff)
+      .setDescription(data.synopsis)
+      .setThumbnail(data.images.jpg.image_url)
+      .addFields(
         {
           name: "Type",
-          value: data.type,
+          value: data.type || "N/A",
           inline: true,
         },
         {
           name: "Episodes",
-          value: data.episodes.toString(),
+          value: data.episodes ? data.episodes.toString() : "N/A",
           inline: true,
         },
         {
           name: "Start Date",
-          value: data.aired.from,
+          value: data.aired.from || "N/A",
           inline: true,
         },
         {
           name: "End Date",
-          value: data.aired.to,
+          value: data.aired.to || "N/A",
           inline: true,
         },
         {
           name: "Score",
-          value: data.score.toString(),
+          value: data.score ? data.score.toString() : "N/A",
           inline: true,
         },
         {
           name: "Rated",
-          value: data.rating,
+          value: data.rating || "N/A",
           inline: true,
         },
         {
           name: "Trailer",
           value: trailerUrl,
           inline: true,
-        },
-      ],
-      image: {
-        url: data.images?.jpg?.image_url || "",
-      },
-      timestamp: new Date(),
-      footer: {
+        }
+      )
+      .setImage(data.images.jpg.image_url)
+      .setTimestamp(new Date())
+      .setFooter({
         text: "Powered by Nomekuma",
-        icon_url: "https://avatars.githubusercontent.com/u/122863540?v=4",
-      },
-    };
+        iconURL: "https://avatars.githubusercontent.com/u/122863540?v=4",
+      });
 
     await interaction.reply({ embeds: [embed] });
   } catch (error) {

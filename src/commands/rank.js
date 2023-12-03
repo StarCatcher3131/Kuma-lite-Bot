@@ -28,7 +28,7 @@ export function handleRankCommand(interaction) {
     .setTimestamp(new Date())
     .setFooter({
       text: "Powered by Nomekuma",
-      icon_url: "https://avatars.githubusercontent.com/u/122863540?v=4",
+      iconURL: "https://avatars.githubusercontent.com/u/122863540?v=4",
     });
 
   interaction.reply({ embeds: [embed] });
@@ -49,7 +49,7 @@ function calculateTimeInServer(joinDate, currentDate) {
   const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30));
   timeDiff -= months * (1000 * 60 * 60 * 24 * 30);
 
-  const weeks = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 7)); 
+  const weeks = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 7));
   timeDiff -= weeks * (1000 * 60 * 60 * 24 * 7);
 
   const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
