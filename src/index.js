@@ -12,7 +12,7 @@ import {
 } from "./commands/manga.js";
 import { handleRankCommand } from "./commands/rank.js";
 import { handleHelpCommand } from "./commands/help.js";
-import { handleWebtoonDownloadCommand } from "./commands/download_webtoon.js";
+import { handleDownloadCommand } from "./commands/download_webtoon.js";
 import { handleWebtoonListCommand } from "./commands/webtoon.js";
 
 const app = express();
@@ -61,7 +61,7 @@ client.on("interactionCreate", async (interaction) => {
       await handleHelpCommand(interaction);
       break;
     case "webtoonDownload":
-      await handleWebtoonDownloadCommand(interaction);
+      await handleDownloadCommand(interaction);
       break;
     case "webtoonList":
       await handleWebtoonListCommand(interaction);
