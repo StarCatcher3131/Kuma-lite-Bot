@@ -2,35 +2,34 @@
  *
  * @param {*} interaction - Represents a Discord interaction
  */
+import { EmbedBuilder } from "discord.js";
 
 export function handleRankCommand(interaction) {
   const guild = interaction.guild;
   const currentDate = new Date();
 
   // Create a message with the ranked list
-  const rankMessage = `**Server Rank**
-    Ranking of Members Bred edition
-  
-    ${guild.members.cache
-      .map((member) => {
-        const joinDate = member.joinedAt;
-        const timeInServer = calculateTimeInServer(joinDate, currentDate);
-        const rank = getRank(timeInServer);
-        return `**${member.user.tag} - ${timeInServer} - ${rank.label} - ${rank.name}`;
-      })
-      .join("\n")}`;
+  const rankMessage = `🏆 **Server Rank**
+  🎉 Ranking of Members Bred edition 🎉
+    
+  ${guild.members.cache
+    .map((member) => {
+      const joinDate = member.joinedAt;
+      const timeInServer = calculateTimeInServer(joinDate, currentDate);
+      const rank = getRank(timeInServer, member.user.tag);
+      return `👤 **${member.user.tag}** - ⏰ ${timeInServer} - 🎖️ ${rank.label} - 🏅 ${rank.name}`;
+    })
+    .join("\n\n")}`;
 
-  // Create an embed to send the ranked list
-  const embed = {
-    title: "Server Rank",
-    color: 0x0099ff,
-    description: rankMessage,
-    timestamp: new Date(),
-    footer: {
+  const embed = new EmbedBuilder()
+    .setTitle("Server Rank")
+    .setColor(0x0099ff)
+    .setDescription(rankMessage)
+    .setTimestamp(new Date())
+    .setFooter({
       text: "Powered by Nomekuma",
       icon_url: "https://avatars.githubusercontent.com/u/122863540?v=4",
-    },
-  };
+    });
 
   interaction.reply({ embeds: [embed] });
 }
@@ -50,6 +49,9 @@ function calculateTimeInServer(joinDate, currentDate) {
   const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30));
   timeDiff -= months * (1000 * 60 * 60 * 24 * 30);
 
+  const weeks = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 7)); 
+  timeDiff -= weeks * (1000 * 60 * 60 * 24 * 7);
+
   const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
   timeDiff -= days * (1000 * 60 * 60 * 24);
 
@@ -67,16 +69,26 @@ function calculateTimeInServer(joinDate, currentDate) {
   let formattedTime = "";
   if (years > 0) {
     formattedTime += `${years} yrs `;
-    if (months > 0 || days > 0) {
+    if (months > 0) {
       formattedTime += `${months} months `;
     }
   } else if (months > 0) {
     formattedTime += `${months} months `;
+    if (weeks > 0) {
+      // Changed from days to weeks
+      formattedTime += `${weeks} weeks `;
+    }
+  } else if (weeks > 0) {
+    // Changed from days to weeks
+    formattedTime += `${weeks} weeks `;
     if (days > 0) {
       formattedTime += `${days} days `;
     }
   } else if (days > 0) {
     formattedTime += `${days} days `;
+    if (hours > 0) {
+      formattedTime += `${hours} hrs `;
+    }
   } else if (hours > 0) {
     formattedTime += `${hours} hrs `;
     if (minutes > 0) {
@@ -100,23 +112,25 @@ function calculateTimeInServer(joinDate, currentDate) {
 }
 /**
  * Determines the rank based on the time in the server.
- * 
+ *
  * @param {string} timeInServer - Formatted time spent in the server.
  * @returns {Object} - Rank object with label and name.
  */
 // Function to determine the rank based on the time in server
-function getRank(timeInServer) {
+function getRank(timeInServer, memberName) {
   if (timeInServer.includes("yrs")) {
-    return { label: "🥇", name: "Gold" };
-  } else if (timeInServer.includes("month") || timeInServer.includes("mo")) {
-    return { label: "🥈", name: "Silver" };
-  } else if (timeInServer.includes("day")) {
-    return { label: "🥉", name: "Bronze" };
-  } else if (timeInServer.includes("hr")) {
-    return { label: "👶", name: "Newbie" };
-  } else if (timeInServer.includes("sec")) {
-    return { label: "👼", name: "Lesser" };
+    return { label: "👑", name: `${memberName}, the King/Queen` };
+  } else if (timeInServer.includes("months")) {
+    return { label: "🦄", name: `${memberName}, the Unicorn` };
+  } else if (timeInServer.includes("weeks")) {
+    return { label: "🐬", name: `${memberName}, the Dolphin` };
+  } else if (timeInServer.includes("days")) {
+    return { label: "🐥", name: `${memberName}, the Chick` };
+  } else if (timeInServer.includes("hrs")) {
+    return { label: "🐢", name: `${memberName}, the Turtle` };
+  } else if (timeInServer.includes("mins")) {
+    return { label: "🐛", name: `${memberName}, the Caterpillar` };
   } else {
-    return { label: "👤", name: "Newcomer" };
+    return { label: "🥚", name: `${memberName}, the Egg` };
   }
 }
