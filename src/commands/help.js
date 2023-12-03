@@ -5,21 +5,40 @@
 import { EmbedBuilder } from "discord.js";
 
 export async function handleHelpCommand(interaction) {
-
   const embed = new EmbedBuilder()
     .setTitle("Help")
     .setColor(0x0099ff)
-    .addFields({
-      name: "Commands",
-      value: `
-          **/randomanime** - Provides a new anime to watch!
-          **/randommanga** - Provides a new manga to read!
-          **/searchanime** - Search for an anime
-          **/searchmanga** - Search for a manga
-          **/rank** - Provides a rank of users based on their time on the Discord server!
-          **/help** - Provides a list of commands
-        `,
-    })
+    .addFields(
+      {
+        name: "`/search <keyword>`",
+        value: "Search for the specified webtoon to get the id",
+      },
+      { name: "`/download`", value: "Initiate the webtoon download process" },
+      {
+        name: "`/rank`",
+        value: "Get the ranking of members based on their time in server",
+      },
+      {
+        name: "`/randomanime`",
+        value: "Get information about a random anime",
+      },
+      {
+        name: "`/help`",
+        value: "Get a list of commands",
+      },
+      {
+        name: "`/searchanime <query>`",
+        value: "Search for an anime",
+      },
+      {
+        name: "`/searchmanga <query>`",
+        value: "Search for a manga",
+      },
+      {
+        name: "`/randommanga`",
+        value: "Get information about a random manga",
+      }
+    )
     .setTimestamp(new Date())
     .setFooter({
       text: "Powered by Nomekuma",
@@ -27,5 +46,4 @@ export async function handleHelpCommand(interaction) {
     });
 
   await interaction.reply({ embeds: [embed] });
- 
 }
