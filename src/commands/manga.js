@@ -62,7 +62,6 @@ export async function handleRandomMangaCommand(interaction) {
       });
 
     await interaction.reply({ embeds: [embed] });
-
   } catch (error) {
     console.error(error);
   }
@@ -84,7 +83,6 @@ export async function handleSearchMangaCommand(interaction) {
       `https://api.jikan.moe/v4/manga?q=${query}`
     );
     const data = response.data.data[0];
-    await interaction.deferReply();
     const embed = new EmbedBuilder()
       .setTitle(data.title || "N/A")
       .setURL(data.url || "")
@@ -125,13 +123,6 @@ export async function handleSearchMangaCommand(interaction) {
         {
           name: "Rated",
           value: data.rating || "N/A",
-          inline: true,
-        },
-        {
-          name: "Trailer",
-          value: data.trailer.youtube_id
-            ? `https://www.youtube.com/watch?v=${data.trailer.youtube_id}`
-            : "No trailer available",
           inline: true,
         }
       )

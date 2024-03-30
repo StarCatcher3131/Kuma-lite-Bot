@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import { registerCommands } from "./routes/route.js";
 import {
   handleRandomAnimeCommand,
@@ -16,6 +17,7 @@ import { handleDownloadCommand } from "./commands/download.js";
 import { handleSearchCommand } from "./commands/search.js";
 const app = express();
 app.get("/", (req, res) => res.send("Hello World!"));
+app.use(cors());
 app.listen(3000, () => console.log("Server is running..."));
 
 // load env variables

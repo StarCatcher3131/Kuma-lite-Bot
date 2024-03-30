@@ -11,7 +11,7 @@ export async function handleRandomAnimeCommand(interaction) {
     // Make a GET request to the specified endpoint
     const response = await axios.get("https://api.jikan.moe/v4/random/anime");
     const data = response.data.data;
-  
+
     // Check if there's a YouTube trailer available
     let trailerUrl = "No trailer available";
     if (data.trailer?.youtube_id) {
@@ -68,7 +68,6 @@ export async function handleRandomAnimeCommand(interaction) {
       });
 
     await interaction.reply({ embeds: [embed] });
-
   } catch (error) {
     console.error(error);
   }
@@ -109,7 +108,8 @@ export async function handleSearchAnimeCommand(interaction) {
 
     let trailerUrl = "No trailer available";
     if (data.trailer?.youtube_id) {
-      trailerUrl = `https://www.youtube.com/watch?v=${data.trailer.youtube_id}`;
+      trailerUrl =
+        `https://www.youtube.com/watch?v=${data.trailer.youtube_id} ` || `N/A`;
     }
     const embed = new EmbedBuilder()
       .setTitle(data.title || "N/A")
@@ -162,7 +162,6 @@ export async function handleSearchAnimeCommand(interaction) {
       });
 
     await interaction.reply({ embeds: [embed] });
-
   } catch (error) {
     console.error(error);
   }
