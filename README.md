@@ -12,6 +12,8 @@ Kuma-Lite is a Discord bot that provides anime and manga recommendations, as wel
 - `/searchmanga`: Search for a specific manga by name.
 - `/rank`: Displays a ranking of server members based on their time in the server.
 - `/help`: Displays a list of available commands.
+- `/search`: Search for naver comics to get id
+- `/download`: downloads naver comic
 
 ## Setup
 
