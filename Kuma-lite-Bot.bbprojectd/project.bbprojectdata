@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>HierarchyData</key>
+	<array>
+		<string>9E8AB16B-DF04-47D3-B877-3CA2D5B6D3C9</string>
+	</array>
+	<key>ProjectItems</key>
+	<dict>
+		<key>9E8AB16B-DF04-47D3-B877-3CA2D5B6D3C9</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9va+gCAAAAAAQQMAAAALmsWSsNHEjfyMDGBbinVLJw
+				opvaD3iFU5vYLFM4soRU5AEAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAGRldm9uAAAACQAA
+				AAEBAABEb2N1bWVudHMAAAAGAAAAAQEAAEdpdEh1YgAA
+				DQAAAAEBAABLdW1hLWxpdGUtQm90AAAAFAAAAAEGAAAQ
+				AAAAIAAAADAAAABEAAAAVAAAAAgAAAAEAwAAgUEAAAAA
+				AAAIAAAABAMAAMMGBAAAAAAACAAAAAQDAAD3BgQAAAAA
+				AAgAAAAEAwAAOS8cAAAAAAAIAAAABAMAADovHAAAAAAA
+				FAAAAAEGAACIAAAAmAAAAKgAAAC4AAAAyAAAAAgAAAAA
+				BAAAQcX0NtlmGWQYAAAAAQIAAAIAAAAAAAAADwAAAAAA
+				AAAAAAAAAAAAAAgAAAAEAwAAAwAAAAAAAAAEAAAAAwMA
+				APUBAAAIAAAAAQkAAGZpbGU6Ly8vDAAAAAEBAABNYWNp
+				bnRvc2ggSEQIAAAABAMAAAAAhxE5AAAACAAAAAAEAABB
+				xdYDwYAAACQAAAABAQAARjk3OERBNDgtMkVFQS00QkY4
+				LTlFQjAtRkQ3NzFFRDU5MTU2GAAAAAECAACBAAAAAQAA
+				AO8TAAABAAAAAAAAAAAAAAABAAAAAQEAAC8AAAAAAAAA
+				AQUAAMwAAAD+////AQAAAAAAAAAQAAAABBAAAGwAAAAA
+				AAAABRAAANgAAAAAAAAAEBAAAAQBAAAAAAAAQBAAAPQA
+				AAAAAAAAAiAAANABAAAAAAAABSAAAEABAAAAAAAAECAA
+				AFABAAAAAAAAESAAAIQBAAAAAAAAEiAAAGQBAAAAAAAA
+				EyAAAHQBAAAAAAAAICAAALABAAAAAAAAMCAAANwBAAAA
+				AAAAAcAAACQBAAAAAAAAEcAAACAAAAAAAAAAEsAAADQB
+				AAAAAAAAENAAAAQAAAAAAAAA
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/devon/Documents/GitHub/Kuma-lite-Bot/</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>Kuma-lite-Bot</string>
+			<key>ItemType</key>
+			<string>FolderReference</string>
+		</dict>
+	</dict>
+	<key>com.barebones.DocumentFormatVersion</key>
+	<integer>5</integer>
+	<key>com.barebones.DocumentType</key>
+	<string>Project</string>
+</dict>
+</plist>
